@@ -40,19 +40,29 @@ class NewVisitorTest(unittest.TestCase):
         
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
-        self.assertTrue(
-            any(row.text == '1: Buy peackock feathers' for row in rows),
-            'New to-do item did not apear'
-            )
-        # There is still text box inviting her to add another item
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        #self.assertTrue(
+        #    any(row.text == '1: Buy peackock feathers' for row in rows),
+        #    f'New to-do item did not apear. Found:\n{table.text}'
+        #    )
+        
+        # There is still text box inviting him to add another item
         # He adds 'Use peacock feathers to make fly'
-        self.fail('Finish the test')
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('Use peacock feathers to make fly')
+        inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
         
         # The page updates again and now shows both items on it
-
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.assertIn('2: Use peacock feathers to make fly', [row.text for row in rows])
+        
         # Edith wonders whather the site will remember her list. she notice about
         # generated a unique URL for her 
-
+        self.fail('Finish the test')
+        
         # He visits the URL - her to-do list is still there
 
         # He is ok 
