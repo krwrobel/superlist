@@ -11,9 +11,11 @@ MAX_WAIT = 10
 
 class NewVisitorTest(LiveServerTestCase):
   
+    fb = "C:\\Users\\krzysztofw\\AppData\\Local\\Mozilla Firefox\\Firefox.exe"
+  
     def setUp(self):
-        fb = "C:\\Users\\krzysztofw\\AppData\\Local\\Mozilla Firefox\\Firefox.exe"
-        self.browser = webdriver.Firefox(firefox_binary=fb)
+        
+        self.browser = webdriver.Firefox(firefox_binary=self.fb)
 
     def tearDown(self):
         self.browser.quit()
@@ -84,7 +86,7 @@ class NewVisitorTest(LiveServerTestCase):
         ## We will use new browser session to make sure 
         ## no info is coming thru cookie etc
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(firefox_binary=self.fb)
         
         #Frank visits the site. Guy list is not show
         
