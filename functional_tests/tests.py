@@ -1,11 +1,12 @@
 # First function al testing with selenium
 
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time 
 import unittest
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
     
     def setUp(self):
         fb = "C:\\Users\\krzysztofw\\AppData\\Local\\Mozilla Firefox\\Firefox.exe"
@@ -25,7 +26,7 @@ class NewVisitorTest(unittest.TestCase):
         
     def test_can_start_a_list_and_retrive_it_latter(self):
         # Guy did heard about new to do apps, she load it to check home page
-        self.browser.get('http://localhost:8000')
+        self.browser.get(self.live_server_url)
 
         #He noticed the page tile and header 
         self.assertIn( 'To-Do',self.browser.title)
@@ -66,6 +67,3 @@ class NewVisitorTest(unittest.TestCase):
         # He visits the URL - her to-do list is still there
 
         # He is ok 
-
-if __name__ == '__main__':
-        unittest.main(warnings='ignore')
