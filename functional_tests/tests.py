@@ -102,9 +102,9 @@ class NewVisitorTest(LiveServerTestCase):
         self.wait_for_row_in_list_table('1: Buy milk')
         
         #Frank get his own unique URL
-        frnk_list_url = self.browser.current_url
+        frank_list_url = self.browser.current_url
         self.assertRegex(frank_list_url, '/lists/.+')
-        self.assertNotEqual(frank_lists_url, guy_links_url)
+        self.assertNotEqual(frank_list_url, guy_list_url)
         
         # Again ther is no trace of Guy list
         page_text = self.browser.find_element_by_tag_name('body').text
