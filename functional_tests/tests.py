@@ -6,6 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time 
 import unittest
+import os
 
 MAX_WAIT = 10
 
@@ -14,9 +15,10 @@ class NewVisitorTest(StaticLiveServerTestCase):
     fb = "C:\\Users\\krzysztofw\\AppData\\Local\\Mozilla Firefox\\Firefox.exe"
   
     def setUp(self):
-        
         self.browser = webdriver.Firefox(firefox_binary=self.fb)
-
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
     def tearDown(self):
         self.browser.quit()
         
@@ -31,7 +33,11 @@ class NewVisitorTest(StaticLiveServerTestCase):
             except (AssertionError, WebDriverException) as e:
                 if time.time() - start_time > MAX_WAIT:
                     raise e
-                time.sleep(0.5)
+                time.sleep(0.3)
+                
+                
+                
+              
         
     def test_can_start_a_list_and_retrive_it_latter(self):
         # Guy did heard about new to do apps, she load it to check home page
