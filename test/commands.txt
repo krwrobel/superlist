@@ -1,0 +1,9 @@
+cd Documents/zadania/python/testdrivendevelopment/deploy_tools/
+
+fab deploy:host=mainuser@67.205.166.73
+
+fab deploy:host=mainuser@superlist-staging.wblkrzysztof.site
+
+fab -H mainuser@67.205.166.73 deploy
+
+fab -i ~/.ssh/id_rsa deploy:host=mainuser@superlist-staging.wblkrzysztof.site
