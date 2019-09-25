@@ -3,6 +3,7 @@ from django.urls import resolve
 from django.http import HttpRequest
 from lists.views import home_page
 from lists.models import Item, List
+from lists.forms import ItemForm
 from django.utils.html import escape
  
 # Create your tests here.
@@ -99,4 +100,10 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'list.html')
         expected_error =escape("You can't have an empty list item")
         self.assertContains(response, expected_error)
+        
+    def test_home_pages_uses_item_form(self):
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
+        
+        
         
