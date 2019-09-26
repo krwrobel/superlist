@@ -1,5 +1,8 @@
 from django.test import TestCase
-from lists.forms import EMPTY_ITEM_ERROR, ItemForm
+from lists.forms import (
+    EMPTY_ITEM_ERROR, ItemForm,
+    DUPLICATE_ITEM_ERROR, ExistingListItemForm
+)
 from lists.models import List, Item
 class ItemFormTest(TestCase):
     
@@ -23,3 +26,11 @@ class ItemFormTest(TestCase):
         self.assertEqual(new_item.text, 'do me')
         self.assertEqual(new_item.list, list_)
     
+    def test_form_renders_item_text_input(self):
+        list_ = List.objects.create()
+        Item.objects.create(list=list_, text='no twins!')
+        form = ExistingListItemForm(for_list=list_, data={'text': 'no twins!'})
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form.errors['text'], [DUPLICATE_ITEM_ERROR])
+        
+        
