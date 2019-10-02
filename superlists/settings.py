@@ -30,7 +30,7 @@ if 'DJANGO_DEBUG_TRUE' in os.environ:
 else:
     DEBUG = False
     SECRET_KEY = 'dda2oty1uy6pek3o83vq7y7y74q27srp84bimgsqg16zj2oklh'
-    ALLOWED_HOSTS = 'superlist-staging.wblkrzysztof.site'
+    ALLOWED_HOSTS = ['superlists-staging.wblkrzysztof.site']
 
 
 #DEBUG = True

@@ -15,7 +15,7 @@ def deploy():
         _get_latest_source()
         _update_virtualenv()
         _create_or_update_dotenv()
-        _update_Static_files()
+        _update_static_files()
         _update_database()
         
 def _get_latest_source():
@@ -28,13 +28,12 @@ def _get_latest_source():
     current_commit = local("git log -n 1 --format=%H", capture=True)
     run(f'git reset --hard {current_commit}')
     
-def _update_virtalenv():
+def _update_virtualenv():
     if not exists('virtualenv/bip/pip'):
         run(f'python3.7 -m venv virtualenv')
     run('./virtualenv/bin/pip install -r requirments.txt')
     
 def _create_or_update_dotenv():
-    append('.env', 'DJANGO_DEBUG_FALSE=y')
     append('.env', f'SITENAME={env.host}')
     current_contents = run('cat .env')
     if 'DJANGO_SECRET_KEY' not in current_contents:
