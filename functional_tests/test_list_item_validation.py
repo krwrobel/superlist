@@ -10,7 +10,7 @@ MAX_WAIT = 10
 class ItemValidationTest(FunctionalTest):
     
     def get_error_element(self):
-        return self.browser.find_element_by_css_selector('.has=error')
+        return self.browser.find_element_by_css_selector('.has-error')
         
     def test_cannot_add_empty_list_items(self):
         #Customer goes to home page and acciedentally tries to submit
@@ -63,7 +63,7 @@ class ItemValidationTest(FunctionalTest):
         
         #He sees a helpful error message
         self.wait_for(lambda: self.assertEqual(
-            self.browser.get_error_element().text,
+            self.get_error_element().text,
             "You've already got this in your list"
         ))
         
@@ -77,7 +77,7 @@ class ItemValidationTest(FunctionalTest):
         self.get_item_input_box().send_keys(Keys.ENTER)
         
         self.wait_for(lambda: self.assertTrue(
-            self.browser.get_error_element().is_displayed()
+            self.get_error_element().is_displayed()
         ))
         
         #She starts typing in the input box to clear error
@@ -85,5 +85,5 @@ class ItemValidationTest(FunctionalTest):
         
         #She don't see error message anymore
         self.wait_for(lambda: self.assertFalse(
-            self.browser.get_error_element().is_displayed()
+            self.get_error_element().is_displayed()
         ))
