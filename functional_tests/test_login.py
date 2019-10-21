@@ -57,7 +57,7 @@ class LoginTest(FunctionalTest):
         if not self.staging_server:
             email =mail.outbox[0]
             self.assertIn(test_email, email.to)
-            self.assertEqaul(email.subject, subject)
+            self.assertEqual(email.subject, subject)
             return email.body
         email_id = None
         start = time.time()
