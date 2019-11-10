@@ -42,7 +42,7 @@ class LoginTest(FunctionalTest):
 
         # she click it
         self.browser.get(url)
-        
+        print(url)
         # she is logged in
         self.wait_to_be_logged_in(email=test_email)
         
