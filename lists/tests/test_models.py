@@ -3,7 +3,7 @@ from lists.models import Item, List
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 User = get_user_model()
-  
+
 class ItemModelTest(TestCase):
 
     def test_default_text(self):
@@ -52,31 +52,15 @@ class ListModelTest(TestCase):
             
     def test_get_absolute_url(self):
         list_ = List.objects.create()
-        self.assertEqual(list_.get_absolute_url(), f'/lists/{list_.id}/')       
-
-    def test_create_new_list_and_first_item(self):
-        List.create_new(first_item_text='new item text')
-        new_item = Item.objects.first()
-        self.assertEqual(new_item.text, 'new item text')
-        new_list = List.objects.first()
-        self.assertEqual(new_item.list,new_list)
+        self.assertEqual(list_.get_absolute_url(), f'/lists/{list_.id}/')
         
-    def test_create_new_optionally_saves_owner(self):
-        user = User.objects.create()
-        List.create_new(first_item_text='new item text', owner=user)
-        new_list = List.objects.first()
-        self.assertEqual(new_list.owner, user)
-        
-    def test_list_can_have_owners(self):
-        List(owner=User()) # should not rise
+    def test_lists_can_have_owners(self):
+        user = User.objects.create(email = 'a@b.com')
+        list_ = List.objects.create(owner=user)
+        self.assertIn(list_, user.list_set.all())
         
     def test_list_owner_is_optional(self):
-        List().full_clean() # should not rise
-        
-    def test_create_returns_new_list_object(self):
-        returned = List.create_new(first_item_text='new item text')
-        new_list = List.objects.first()
-        self.assertEqual(returned, new_list)
+        List.objects.create() # should not rise
         
     def test_list_name_is_first_item_text(self):
         list_ = List.objects.create()
