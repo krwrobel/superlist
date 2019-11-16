@@ -58,7 +58,7 @@ class NewVisitorTest(FunctionalTest):
         ## We will use new browser session to make sure 
         ## no info is coming thru cookie etc
         self.browser.quit()
-        self.browser = webdriver.Firefox(firefox_binary=self.fb)
+        self.browser = webdriver.Firefox()
         
         #Frank visits the site. Guy list is not show
         
