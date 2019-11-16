@@ -6,3 +6,4 @@ __pycache__
 /static
 .env
 readme.txt
+functional_tests/screendumps

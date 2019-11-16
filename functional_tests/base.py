@@ -9,8 +9,7 @@ import time
 import os
 from datetime import datetime
 
-SCREEN_DUMP_LOCATION = os.path.join(
-os.path.dirname(os.path.abspath(__file__)), 'screendumps'
+SCREEN_DUMP_LOCATION = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'screendumps')
 
 MAX_WAIT = 10
 
